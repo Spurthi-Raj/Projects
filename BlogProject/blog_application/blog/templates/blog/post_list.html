@@ -1,0 +1,77 @@
+{% extends 'blog/base.html' %} {% block content %}
+<div class="container">
+  <h1 style="color: rgb(51, 7, 7)">Blog Posts</h1>
+  <div>
+    <a href="{% url 'create_post' %}">
+      <button class="create-btn">Create Post</button>
+    </a>
+  </div>
+
+  <div>
+    <form method="GET" action="">
+      <input
+        type="text"
+        name="search"
+        placeholder="Search posts..."
+        value="{{request.GET.search |default:'' }}"
+        style="padding: 8px; width: 250px"
+      />
+      <button type="submit">Search</button>
+    </form>
+  </div>
+
+  <br />
+
+  {% if page_obj %} {% for post in page_obj %} {% if user == post.author %}
+
+  <div class="post-card">
+    <div class="post-title">
+      <a href="{% url 'post_detail' post.id %}"> {{ post.title}} </a>
+    </div>
+
+    <div class="post-content">{{ post.content|truncatewords:25}}</div>
+
+    <div class="post-meta">
+      Author: {{ post.author }} | Published on: {{ post.created_at }}
+    </div>
+    <div class="action-buttons">
+      <a href="{% url 'edit_post' post.id %}">
+        <button class="edit-btn">Edit</button>
+      </a>
+
+      <form
+        method="POST"
+        action="{% url 'delete_post' post.id %}"
+        style="display: inline"
+      >
+        {% csrf_token %}
+        <button class="delete-btn">Delete</button>
+      </form>
+    </div>
+  </div>
+
+  {% endif %} {% empty %} {% endfor %} {% else %}
+  <p>No results found.</p>
+  {% endif %} {% if page_obj.paginator.num_pages > 1 %}
+
+  <div style="text-align: center; margin-top: 20px">
+    {% if page_obj.has_previous %}
+    <a href="?q={{ request.GET.search }}&page=1">First</a>
+    <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+    {% endif %}
+
+    <span>
+      Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+    </span>
+
+    {% if page_obj.has_next %}
+    <a href="?q={{ request.GET.search }}&page={{ page_obj.next_page_number }}"
+      >Next</a
+    >
+    <a href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+    {% endif %}
+  </div>
+
+  {% endif %}
+</div>
+{% endblock content %}
