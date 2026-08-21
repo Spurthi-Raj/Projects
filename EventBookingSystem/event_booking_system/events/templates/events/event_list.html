@@ -1,0 +1,73 @@
+{% extends 'events/base.html' %} {% block content %}
+<div class="container">
+  <h1 style="color: rgb(51, 7, 7)">Events</h1>
+  <div>
+    <a href="{% url 'create_event' %}">
+      <button class="create-btn">Create Post</button>
+    </a>
+  </div>
+
+  <div>
+    <form method="GET" action="">
+      <input
+        type="text"
+        name="search"
+        placeholder="Search posts..."
+        value="{{request.GET.search|default:'' }}"
+        style="padding: 8px; width: 250px"
+      />
+      <button type="submit">Search</button>
+    </form>
+  </div>
+
+  <br />
+  {% for event in events %}
+
+  <div class="post-card">
+    <div class="post-title">
+      <a href="{% url 'event_detail' event.slug %}"> {{ event.title}} </a>
+      {% if event.image %}
+        <img src="{{ event.image.url }}" width="50" height="50"/>
+
+      {% endif %}
+    </div>
+
+    <div class="post-content">{{ event.description}}</div>
+
+    <div class="action-buttons">
+      <a href="{% url 'edit_event' event.id%}">
+        <button class="edit-btn">Edit</button>
+      </a>
+
+      <form
+        method="POST"
+        action="{% url 'delete_event' event.id %}"
+        style="display: inline"
+      >
+        {% csrf_token %}
+        <button class="delete-btn">Delete</button>
+      </form>
+    </div>
+  </div>
+  {% empty %}
+  <p>No events available.</p>
+  {% endfor %} {% if page_obj.paginator.num_pages > 1 %}
+  <div style="text-align: center; margin-top: 20px">
+    {% if page_obj.has_previous %}
+    <a href="?q={{ request.GET.search }}&page=1">First</a>
+    <a href="?page={{page_obj.previous_page_number}}">Previous</a>
+    {% endif %}
+    <span>
+      Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+    </span>
+    {% if page_obj.has_next %}
+    <a href="?q={{ request.GET.search }}&page={{ page_obj.next_page_number }}"
+      >Next</a
+    >
+    <a href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+    {% endif %}
+  </div>
+
+  {% endif %}
+</div>
+{% endblock content %}

@@ -1,0 +1,143 @@
+/* Container */
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+
+/* NAVBAR */
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #333;
+  padding: 15px 40px;
+}
+
+.logo {
+  color: white;
+  font-size: 22px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  margin-left: 20px;
+  font-size: 16px;
+}
+
+.nav-links a:hover {
+  text-decoration: underline;
+}
+
+.container {
+  width: 70%;
+  margin: auto;
+  margin-top: 40px;
+}
+
+/* Heading */
+h1 {
+  margin-bottom: 20px;
+}
+
+/* Create Button */
+.create-btn {
+  background: linear-gradient(45deg, #6a11cb, #5f2c82);
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.create-btn:hover {
+  opacity: 0.9;
+}
+
+/* Post Card */
+.post-card {
+  background: #fff;
+  padding: 20px;
+  margin-bottom: 25px;
+  border-radius: 10px;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Title */
+.post-title a {
+  font-size: 24px;
+  font-weight: bold;
+  color: #5a2ea6;
+  text-decoration: underline;
+}
+
+/* Content */
+.post-content {
+  color: #444;
+  margin: 10px 0;
+}
+
+/* Meta */
+.post-meta {
+  font-size: 14px;
+  color: #777;
+}
+
+/* Button Container */
+.action-buttons {
+  text-align: right;
+  margin-top: 15px;
+}
+
+/* Edit Button */
+.edit-btn {
+  background-color: #3b5998;
+  color: white;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 5px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+/* Delete Button */
+.delete-btn {
+  background-color: #d9534f;
+  color: white;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Hover Effects */
+.edit-btn:hover {
+  background-color: #2d4373;
+}
+
+.delete-btn:hover {
+  background-color: #c9302c;
+}
+
+/* Paginator */
+
+.pagination a {
+  padding: 8px 12px;
+  margin: 2px;
+  background: #eee;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.pagination a:hover {
+  background: #5a2ea6;
+  color: white;
+}
